@@ -1,7 +1,4 @@
 ## output_checkerの作成
-output_checkerとはユーザープログラムの出力したoutファイルから`AC`、`WA`を判定するプログラムです。
-
-output_checkerが存在しないと、`AC`をとるために、出力ファイルの完全一致が必要となり、不快になります。
 
 ### output_checkerの仕様
 test_lib形式で受け取ります。
@@ -63,3 +60,22 @@ cxx_judge(src='output_checker.cpp', flags=my_cpp_flags, dependency = my_dependen
 
 ### 備考
 `#include <bits/stdc++>` がないと、自分の環境ではtestが通っても、GitHub上のtestはコンパイルエラーで落ちました。
+
+## scoreをつける
+AtCoder 上でサンプルとそれ以外で区別したいので scoreをつけます。
+
+TESTSETに以下のように追加します。
+```Python
+subtask_testset(name='All', score=100, input_patterns=['*'])
+subtask_testset(name='sample', score=0, input_patterns=['*sample*'])
+```
+
+input_patterns に正規表現で表現します。部分点も同じようにつけれます。
+
+部分点をつける場合は SOLUTION に 以下のように記述するとその解法がその部分点になるかを rime test で判定してくれます。
+
+```Python
+expected_score(100)
+```
+rime test をするときは、-k オプションをつけると正常に部分点が正しくつくかを判定してくれます。
+
