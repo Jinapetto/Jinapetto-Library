@@ -108,6 +108,8 @@ php imojudge_upload.php <task_id> <先ほど作成した atcoder のパス>
 
 で AtCoder にアップロードできます。(PHP の実行環境が必要です。) `task_id` は `TASK_ID_LOWER_BOUND` をA問題として順番に振られています。
 
+同じ task_id にもう一度アップロードすることでジャッジの上書きができます。
+
 ## 問題文のアップロード
 
 ```sh
