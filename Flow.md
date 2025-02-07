@@ -66,16 +66,43 @@ AtCoder 上でサンプルとそれ以外で区別したいので scoreをつけ
 
 TESTSETに以下のように追加します。
 ```Python
+subtask_testset(name='Sample', score=0, input_patterns=['*sample*'])
 subtask_testset(name='All', score=100, input_patterns=['*'])
-subtask_testset(name='sample', score=0, input_patterns=['*sample*'])
 ```
 
-input_patterns に正規表現で表現します。部分点も同じようにつけれます。
+`input_patterns` に正規表現で表現します。部分点も同じようにつけれます。 
 
-部分点をつける場合は SOLUTION に 以下のように記述するとその解法がその部分点になるかを rime test で判定してくれます。
+部分点をつける場合は `SOLUTION` に 以下のように記述するとその解法がその部分点になるかを `rime test` で判定してくれます。
 
 ```Python
 expected_score(100)
 ```
-rime test をするときは、-k オプションをつけると正常に部分点が正しくつくかを判定してくれます。
+`rime test` をするときは、`-k` オプションをつけると正常に部分点が正しくつくかを判定してくれます。
+
+## AtCoder へのアップロード
+
+```sh
+$ rime pack
+```
+
+を実行します。 pack が終わると `rime-out` の中に `atcoder` というファイルが作成されます。
+
+`imojudge_upload.php` と同じディレクトリに `config-imojudge_upload.php` を作成して、以下のように記述します。
+
+```PHP
+<?php
+@define('IMOJUDGE_CONTEST_ID', xxxx); // コンテストID
+@define('IMOJUDGE_TASK_UPLOAD_PASSWORD', 'xxxx'); // アップロードパスワード
+@define('IMOJUDGE_TASK_ID_LOWER_BOUND', xxxx); // inclusive
+@define('IMOJUDGE_TASK_ID_UPPER_BOUND', xxxx); // inclusive
+?>
+```
+
+情報はコンテストページの問題ページのアップローダ設定情報にあるのを入れます。
+
+```sh
+php imojudge_upload.php <task_id> <先ほど作成した atcoder のディレクトリ>
+```
+
+で AtCoder にアップロードできます。 `task_id` は `TASK_ID_LOWER_BOUND` をA問題として順番に振られています。
 
