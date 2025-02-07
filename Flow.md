@@ -12,6 +12,8 @@ return 0で`AC`、それ以外で`WA`、output_checkerの異常終了で`IE`と�
 
 スペースや改行が問題文で指定されたのとは異なる、最後にスペースが入っていても`AC`と判定したい場合は以下のコードを使えばよいです。
 
+https://github.com/MikeMirzayanov/testlib/tree/master/checkers ここに色々あります。
+
 ```C++
 #include <bits/stdc++.h>
 
