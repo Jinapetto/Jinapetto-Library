@@ -104,5 +104,5 @@ $ rime pack
 php imojudge_upload.php <task_id> <先ほど作成した atcoder のディレクトリ>
 ```
 
-で AtCoder にアップロードできます。 `task_id` は `TASK_ID_LOWER_BOUND` をA問題として順番に振られています。
+で AtCoder にアップロードできます。(PHP の実行環境が必要です。) `task_id` は `TASK_ID_LOWER_BOUND` をA問題として順番に振られています。
 
