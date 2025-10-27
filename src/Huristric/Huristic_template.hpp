@@ -56,7 +56,7 @@ struct XorShift{
 // 2sec -> 1e9 times
 inline bool ac(double start_time, double cur_time, double end_time, double score_dist, double start_temp, double end_temp){
     double temp = start_temp + (end_temp - start_temp) * (cur_time - start_time) / (end_time - start_time);
-    // double temp = start_temp * pow(end_temp / start_temp, (cur_time - start_time) / (end_time - start_time));
+    // double temp = start_temp * pow(end_temp / start_temp, (cur_time - start_time) / (end_time - start_time)); // end_temp = 0 とすると常に temp = 0
     if(score_dist >= 0.0) return true;
     if(score_dist <= -8.0 * temp) return false;
     return rnd.d() < exp(score_dist/temp);
@@ -65,6 +65,6 @@ inline bool ac(double start_time, double cur_time, double end_time, double score
 // 2sec -> 7e8 times
 inline double mn_ac(double start_time, double cur_time, double end_time, double start_temp, double end_temp){
     double temp = start_temp + (end_temp - start_temp) * (cur_time - start_time) / (end_time - start_time);
-    // double temp = start_temp * pow(end_temp / start_temp, (cur_time - start_time) / (end_time - start_time));
+    // double temp = start_temp * pow(end_temp / start_temp, (cur_time - start_time) / (end_time - start_time)); // end_temp = 0 とすると常に temp = 0
     return log(rnd.d()) * temp;
 }
