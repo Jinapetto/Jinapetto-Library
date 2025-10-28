@@ -37,6 +37,7 @@ struct Timer{
 } tim;
 
 struct XorShift{
+    using result_type = uint32_t;
     uint64_t x = 2003082720030827ull;
     inline uint32_t operator()(){
         x^=x<<7;
@@ -51,6 +52,8 @@ struct XorShift{
     inline double d(){
         return (double)((*this)() & 0xFFFFFF) / 16777216.0;
     }
+    static constexpr uint32_t min() { return 0; }
+    static constexpr uint32_t max() { return UINT32_MAX; }
 } rnd;
 
 // 2sec -> 1e9 times
