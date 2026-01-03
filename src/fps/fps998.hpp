@@ -264,7 +264,7 @@ struct FormalPowerSeries : vector<mint> {
     if ((int)r.size() <= 64) {
       FPS f(*this), g(r);
       g.shrink();
-      mint coeff = g.back().inverse();
+      mint coeff = g.back().inv();
       for (auto &x : g) x *= coeff;
       int deg = (int)f.size() - (int)g.size() + 1;
       int gs = g.size();
