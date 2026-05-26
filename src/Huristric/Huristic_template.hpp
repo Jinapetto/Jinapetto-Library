@@ -71,3 +71,11 @@ inline double mn_ac(double start_time, double cur_time, double end_time, double 
     // double temp = start_temp * pow(end_temp / start_temp, (cur_time - start_time) / (end_time - start_time)); // end_temp = 0 とすると常に temp = 0
     return log(rnd.d()) * temp;
 }
+
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    return 0;
+}
