@@ -1,0 +1,85 @@
+// problem : https://atcoder.jp/contests/abc186/tasks/abc186_e
+#include <bits/stdc++.h>
+//#include <atcoder/all>
+using namespace std;
+//using namespace atcoder;
+//using mint = modint998244353;
+
+//多倍長整数//
+//#include <boost/multiprecision/cpp_int.hpp>
+//namespace mp = boost::multiprecision;
+//using Bint = mp::cpp_int;
+
+const int INF = 2e9;
+const int MOD = 998244353;
+const long long LINF = 5e18;
+
+using ll = long long;
+using vi = vector<int>;
+using vl = vector<long long>;
+using vs = vector<string>;
+using vc = vector<char>;
+using vb = vector<bool>;
+using vvi = vector<vector<int>>;
+using vvvi = vector<vector<vector<int>>>;
+using vvvvi = vector<vector<vector<vector<int>>>>;
+using vvl = vector<vector<long long>>;
+using vvvl = vector<vector<vector<long long>>>;
+using vvvvl = vector<vector<vector<vector<long long>>>>;
+using vvc = vector<vector<char>>;
+using vvb = vector<vector<bool>>;
+using vvvb = vector<vector<vector<bool>>>;
+using vvvvb = vector<vector<vector<vector<bool>>>>;
+
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
+#define dump(x)  cout << #x << " = " << (x) << endl;
+#define Yes(n) cout << ((n) ? "Yes" : "No"  ) << endl
+#define ALL(obj) (obj).begin(),(obj).end()
+
+/*
+説明
+Baby-step Giant-step
+{f(x)}^N = x となる関数fに対して
+{f(s)}^t = g となる最小のtを求める
+f : T -> T f(x) 関数fをそのまま入れる
+fm : T -> T {f(x)}^M 関数fをM回したものを入れる
+O(M + N/M)
+M = sqrt(N) で O(√N)
+参考 https://atcoder.jp/contests/abc270/editorial/4965
+verify https://atcoder.jp/contests/abc270/submissions/58147313
+*/
+
+ll n, s, k;
+ll sqrt_n;
+ll f(ll x){return (x + k)%n;}
+ll fm(ll x){return (x + k*sqrt_n)%n;}
+
+template<typename T>
+ll bsgs(T s, T g, ll n, ll m,const function<T(T)> &f,const function<T(T)> &fm){
+	map<T,ll> mp;
+	for(int j = 1;j <= m;j++){
+		g = f(g);
+		mp[g] = j;
+	}
+	for(int i = 1;i <= (n + m - 1)/m;i++){
+		s = fm(s);
+		if(mp.count(s)) return m*i - mp[s];
+	}
+	return -1;
+}
+
+int main(){
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int t;
+    cin >> t;
+    for(;t--;){
+        cin >> n >> s >> k;
+        if((n - s)%gcd(n, k) != 0) cout << -1 << '\n';
+        else{
+            sqrt_n = sqrt(n);
+            cout << bsgs<ll>(s, 0LL, n, sqrt_n, f, fm) << '\n';
+        }
+    }
+    return 0;
+}
