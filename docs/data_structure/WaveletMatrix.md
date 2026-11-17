@@ -1,7 +1,7 @@
 ## 説明
 Wavelet Matrixです。
 ## コンストラクタ
-WaveletMatrix<T> (vector<T> a): aでWaveletMatrixを生成する。
+WaveletMatrix<T> (vector<T> a): aでWaveletMatrixを生成する。Tは整数型で、aの要素は非負であること（uint64_t も可）。
 
 access(k) k番目の要素の値を得る。
 

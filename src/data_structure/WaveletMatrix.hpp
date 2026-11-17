@@ -6,7 +6,7 @@ struct bit_vector {
     vector<u32> count;
     u32 n, zeros;
     inline u32 get(u32 i) const { return u32(block[i / w] >> (i % w)) & 1u; }
-    inline void set(u32 i) { block[i / w] |= 1LL << (i % w); }
+    inline void set(u32 i) { block[i / w] |= 1ULL << (i % w); }
     bit_vector() {}
     bit_vector(int _n) { init(_n); }
     void init(int _n) {
@@ -30,7 +30,7 @@ template<typename T> struct WaveletMatrix {
     vector<bit_vector> bv;
     WaveletMatrix(const vector<T>& _a) : n(_a.size()), a(_a) { build(); }
     void build() {
-        lg = __lg(max(*max_element(begin(a), end(a)), 1)) + 1;
+        lg = __lg(max(*max_element(begin(a), end(a)), T(1))) + 1;
         bv.assign(lg, n);
         vector<T> cur = a, nxt(n);
         for(int h = lg - 1; h >= 0; --h) {
@@ -79,7 +79,8 @@ template<typename T> struct WaveletMatrix {
     T kth_largest(int l, int r, int k) { return kth_smallest(l, r, r - l - k - 1); }
     // count i s.t. (l <= i < r) && (v[i] < upper)
     int range_freq(int l, int r, T upper) {
-        if(upper >= (T(1) << lg)) return r - l;
+        if(upper <= 0) return 0;
+        if((upper >> (lg - 1)) >> 1) return r - l;  // upper >= 2^lg (lg=64 でもシフト幅<64)
         int ret = 0;
         for(int h = lg - 1; h >= 0; --h) {
             bool f = (upper >> h) & 1;
